@@ -1,0 +1,12 @@
+{
+                "id": 2001,
+                "fname":"Bill",
+                "lname":"daves",
+                "address" : [{
+                     "stnum": 226,
+                     "street": "George Street",
+                     "suburb": "Sydney",
+                     "state": "NSW",
+                     "pin": 2000
+                  }]
+}

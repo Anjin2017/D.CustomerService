@@ -1,0 +1,114 @@
+#%RAML 1.0 Extension
+extends: deloittesalesforce.raml
+version: V2
+
+types:
+  Order:
+    type: object
+    properties: 
+        id: integer
+        desc: string # description
+        customer : Customer
+        Orderdate:  date-only
+        items: [LineItem]
+        totalprice: number # total price
+  LineItem:
+    type: object
+    properties: 
+      product: Product
+      quntity: integer
+  Product:
+    type: object
+    properties: 
+      id: integer
+      pname: string # product name
+      price: number # product price
+
+/Orders:
+  get:
+    is: [ hasReqCache-control, hasCachebalResponse,hasNotChanged, hasCommonErrorCodes,hasBadRequest]
+    queryParameters: 
+      customerId?: integer
+      productId?: integer
+    description: Get Order list. optionally get orders by Customer Id, Product Id
+    responses:
+      200:
+        body: 
+          type: Order[]
+         
+  post:
+    is: [ hasCommonErrorCodes,hasBadRequest]
+    body: 
+      type: Order
+    responses: 
+      201:
+        body: 
+          type: object 
+          example: |
+            { "message": "Order Created" }
+  put:
+    is: [ hasCommonErrorCodes,hasBadRequest]
+    body: 
+      type: Order
+    responses: 
+      200:
+        body: 
+          type: object 
+          example: |
+            { "message": "Order Created" }
+
+  /{ID}:
+    get:
+      description: Get Orders by ID
+      is: [ hasReqCache-control, hasCachebalResponse, hasNotChanged, hasCommonErrorCodes,hasBadRequest]
+      responses: 
+       200:
+        body: 
+          type: Order 
+          
+  
+  /OrderDate/{FromDate}{todate}:
+    get:
+      is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]    
+
+
+/Products:
+  get:
+    description: Get product list
+    is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+    responses: 
+      200:
+        body: 
+          type: Product[]
+                
+  post:
+    is: [ hasCommonErrorCodes,hasBadRequest]
+    body: 
+      type: Product
+    responses: 
+      201:
+        body: 
+          type: object 
+          example: |
+            { "message": "Product Created" }
+  put:
+    is: [ hasCommonErrorCodes,hasBadRequest]
+    body: 
+      type: Product
+    responses: 
+      201:
+        body: 
+          type: object 
+          example: |
+            { "message": "Product updated" }
+  /{ID}:
+    get:
+      description: get product details by ID
+      is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+      responses: 
+       200:
+        body: 
+          type: Product 
+  
+  
+

@@ -1,0 +1,38 @@
+[
+               {
+                "id": 2001,
+                "fname":"Bill",
+                "lname":"daves",
+                "address" : [{
+                     "stnum": 226,
+                     "street": "George Street",
+                     "suburb": "Sydney",
+                     "state": "NSW",
+                     "pin": 2000
+                  }]
+               },
+               {
+                 "id": 2002,
+                 "fname":"Thomas",
+                 "lname":"J Muller",
+                 "address" : [{
+                     "stnum": 12,
+                     "street": "Pitt Street",
+                     "suburb": "Sydney",
+                     "state": "NSW",
+                     "pin": 2000
+                  }]
+               },
+               {
+                 "id": 2003,
+                 "fname":"Martin",
+                 "lname":"Lan",
+                 "address" : [{
+                     "stnum": 23,
+                     "street": "Yark Street",
+                     "suburb": "Sydney",
+                     "state": "NSW",
+                     "pin": 2000
+                  }]
+               }
+              ]

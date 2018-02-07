@@ -1,0 +1,16 @@
+#%RAML 1.0 Trait
+usage: use thi when the response is collection and cacheing is required
+responses: 
+      200:
+        headers: 
+          Cache-Control:
+           type:  string
+           example: max-age=300
+          ETag:
+            type: string
+            example: "x2345ee"
+        # body: 
+        #   application/json:
+        #     maxItems: 10
+        #     type: <<resourceName>>[]            
+        #     example: !include ../examples/<<resourceName|!pluralize>>.json

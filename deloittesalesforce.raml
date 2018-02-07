@@ -1,0 +1,129 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/e14405a5-6f2e-494c-9c61-4b753e9bce83 # 
+title: Deloitte SalesForce 
+mediaType: application/json
+
+description: API for Customer Relationtionship
+documentation: 
+  - title: Overview
+    content : | 
+      This api is provided for developed to build custormer realationship application. These APIs are designed considering mobile user and customer service support.
+version: v1
+
+types: 
+  Customer:
+    type: object
+    properties: 
+        id: integer
+        fname: string # fist name
+        lname: string # last name
+        address : Address[] # address object
+  Address: !include types/Address.raml
+  PostResponse:
+    type: object
+    properties: 
+      customerId: integer
+      message:  string
+traits:
+    hasReqCache-control: !include traits/hasReqCache-control.raml
+    hasCachebalResponse: !include traits/hasCachebalResponse.raml
+    hasNotFaund: !include traits/hasNotFound.raml
+    hasNotChanged: !include traits/hasNotChanged.raml
+    hasCommonErrorCodes: !include traits/hasCommongErrorCodes.raml
+    hasBadRequest: !include traits/hasBadRequest.raml
+
+/Customers:
+  get:
+    is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+    description: Get customer list, user can get customer
+    queryParameters:
+       fname: 
+        type: string
+        description: "get customers by fistname"
+        required: false # this is optional parameted to, designed to call API with first name. multipe customer objects are expected in result"
+       lname:
+        type: string
+        description: "get customers by last name" 
+        required: false
+    responses: 
+      200:
+        body: 
+          application/json:
+            type: Customer[]
+            example: !include examples/CustomersList.json
+          
+  post:
+    is: [ hasBadRequest,hasCommonErrorCodes]
+    body: 
+      application/json:
+        description: 
+        example: !include examples/SingleCustomer.json
+    responses: 
+      201:
+        description: 
+        body: 
+          application/json:
+            type: PostResponse
+            example: |
+              {
+                "customerId": 2004,
+                "message" : "custmer with id 2006 created successfully!"
+              }
+  patch:
+      is: [ hasBadRequest,hasCommonErrorCodes]
+      description: this method is used to update customer record, not for replacement
+      body: 
+        type: Customer
+        example: !include examples/SingleCustomer.json  # changed data for customer
+      responses: 
+        200:
+          body: 
+            example: |
+              {
+                "message" : "Customer data updated"
+              }
+  put:
+    is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+    body: 
+        application/json:
+          description: 
+          example: !include examples/SingleCustomer.json
+    responses: 
+        200:
+          description: 
+          body: 
+            application/json:
+              example: |
+                {
+                    "message" : "Customer udpated"
+                }
+       
+
+  /{id}:
+    get:
+      is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+      description: get customer by ID
+      responses: 
+        200:
+          body: 
+            type: Customer
+            example: !include examples/SingleCustomer.json
+              
+    
+    delete:
+      is: [ hasCommonErrorCodes,hasBadRequest]
+      responses: 
+        200:
+          body: 
+            example: |
+              { "message" : "Customer record deleted" }
+        401:
+          body:
+            example: |
+              { "message" : "Unauthorised"} 
+        402:
+          body: 
+            example: |
+              { "message" : "Missing parrameters"} 
+
+
