@@ -11,7 +11,7 @@ Get 	/Customers
 Get	/Customer?fname=<FirstName>&lname=<Lastname>
 Get 	/Customers/{ID}
 Post	/Customers
-	Create Customer record. Address is maintained as separate resource. When Customer is created, Address is created as well.  Implementation of association between customer and address object abstracted from API consumers.
+    =>	Create Customer record. Address is maintained as separate resource. When Customer is created, Address is created as well.               Implementation of association between customer and address object abstracted from API consumers.
 Patch	/Customers
 Put 	/Customers
 
