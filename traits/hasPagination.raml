@@ -1,0 +1,24 @@
+#%RAML 1.0 Trait
+usage: this is used to enforce pagination parameted
+queryParameters: 
+  limit: 
+    type: integer
+    description: this parameter is number of records to be returned in response
+    required: true # required 
+    example: 1000
+    default: 100 
+  offset: 
+    type :  integer
+    description: this parrameter should contain Id(customer Id) that was returned in previous call. if this is fitst call, then it should be set to 00.
+    required: true
+    default: 20
+
+    
+  
+
+
+
+
+
+
+  
