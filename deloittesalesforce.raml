@@ -1,5 +1,5 @@
 #%RAML 1.0
-baseUri: https://mocksvc.mulesoft.com/mocks/e14405a5-6f2e-494c-9c61-4b753e9bce83 # 
+baseUri: https://mocksvc.mulesoft.com/mocks/52307f69-3eac-451b-abe3-d2dfe5d73a70 # baseUri: https://mocksvc.mulesoft.com/mocks/e14405a5-6f2e-494c-9c61-4b753e9bce83 # 
 title: Deloitte SalesForce 
 mediaType: application/json
 
@@ -31,20 +31,12 @@ traits:
     hasNotChanged: !include traits/hasNotChanged.raml
     hasCommonErrorCodes: !include traits/hasCommongErrorCodes.raml
     hasBadRequest: !include traits/hasBadRequest.raml
-
+    hasPagination: !include traits/hasPagination.raml
+    
 /Customers:
   get:
-    is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
-    description: Get customer list, user can get customer
-    queryParameters:
-       fname: 
-        type: string
-        description: "get customers by fistname"
-        required: false # this is optional parameted to, designed to call API with first name. multipe customer objects are expected in result"
-       lname:
-        type: string
-        description: "get customers by last name" 
-        required: false
+    description: Get customer list , pagination enforce
+    is: [ hasPagination, hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
     responses: 
       200:
         body: 
