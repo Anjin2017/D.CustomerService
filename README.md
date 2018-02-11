@@ -9,6 +9,7 @@ Version V1 APIs
 
 Get /Customers/{limit}{offset}
    -> this API is used to get full list of customers , call to this API should be initiated using limit and offset query parameters. 
+   if there are no more records to return based on limit and offset, API will retutn 404(Not Found) status code.
       
 Get 	/Customers/{ID}
     -> Get customer details using customer ID
@@ -24,6 +25,7 @@ Extension   V2 APIS
 
 Get /Orders/{Limit}{offset}
     -> this api is used to get all sales orders. this API should be called using Limit and Offset query parameters.  
+       if there are no more records to return based on limit and offset, API will return 404(Not Found) status code.
 Get  /Orders?customerId=<Customer id>&ProductId=<Prodcut id>
    ->  Get list of orders by customer ID, along with customer ID, pagination query parametes required 
 
@@ -34,8 +36,8 @@ Get  /Orders?ProductId=<Prodcut id>
 Get /Order/OrderDate/{FromDate}{ToData}
     ->  This API will be used to get order using order date range
 
-Get /Products
-    ->  Get all Products
+Get /Products/{limit)(offset)
+    ->  Get all Products. this API need pagination parameters to limit the response size.
 
 Get	 /Products/{ID}
     ->  Get Products by ID
