@@ -36,7 +36,7 @@ traits:
 /Customers:
   get:
     description: Get customer list , pagination enforce
-    is: [ hasPagination, hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+    is: [ hasPagination, hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest,hasNotFaund ]
     responses: 
       200:
         body: 
@@ -117,4 +117,5 @@ traits:
           body: 
             example: |
               { "message" : "Missing parrameters"} 
+
 
