@@ -7,29 +7,41 @@ Further extension is defined with Products and Orders
 
 Version V1 APIs
 
-Get 	/Customers
-Get	/Customer?fname=<FirstName>&lname=<Lastname>
+Get /Customers/{limit}{offset}
+   -> this API is used to get full list of customers , call to this API should be initiated using limit and offset query parameters. 
+      
 Get 	/Customers/{ID}
+    -> Get customer details using customer ID
+   
 Post	/Customers
     =>	Create Customer record. Address is maintained as separate resource. When Customer is created, Address is created as well.               Implementation of association between customer and address object abstracted from API consumers.
 Patch	/Customers
+    
 Put 	/Customers
 
 
 Extension   V2 APIS
-Get /Orders
-	Get orders list 
+
+Get /Orders/{Limit}{offset}
+    -> this api is used to get all sales orders. this API should be called using Limit and Offset query parameters.  
 Get  /Orders?customerId=<Customer id>&ProductId=<Prodcut id>
-	Get list of orders , with optional parameters for customer id and/or product id
+   ->  Get list of orders by customer ID, along with customer ID, pagination query parametes required 
+
+Get  /Orders?ProductId=<Prodcut id>
+   -> Gey list of Order by Product Id. Pagination parameters required
+    
+   
 Get /Order/OrderDate/{FromDate}{ToData}
-	This API will be used to get order using order date range
+    ->  This API will be used to get order using order date range
 
 Get /Products
-	Get all Products
+    ->  Get all Products
 
 Get	 /Products/{ID}
-	Get Products by ID
-Post	 /Products
+    ->  Get Products by ID
+    
+Post /Products
+
 Put	 /Products
 
 
@@ -54,10 +66,11 @@ Key Design Decisions:
 
 1.	Customer Address is considered as a separate resource. Customer objects are composite of customer attributes and Address object. By using Address as separate resource further extension can be done to include API for operations on Address. Some of the future extension can include Address Validation API, CRUD on Address 
 2.	Delete is allowed through customer ID. This will ensure accidental deletion of customer data
+3.	GET methos on Customers and Orders required pagination parameters(Limit and Offset). 
 
 
 Alternative Design:
-1.	when sending large data, limit and offset attributes can be used. These are not considered in current API specification. But these are key considerations for API design
+
 2.	API for searching by FirstName and LastName can be provided. Current API spec provide provision to use these parameters as query parameters.
 3.	Currently the resource properties are limited and payload size is relatively less. Otherwise explicit properties can be mentioned to limit the payload size. Also, in current spec caching is enabled for the APIs returning large data, so network load is relatively less.
 
