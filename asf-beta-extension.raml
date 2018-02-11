@@ -26,7 +26,7 @@ types:
 
 /Orders:
   get:
-    is: [ hasReqCache-control, hasCachebalResponse,hasNotChanged, hasCommonErrorCodes,hasBadRequest]
+    is: [ hasPagination, hasReqCache-control, hasCachebalResponse,hasNotChanged, hasCommonErrorCodes,hasBadRequest, hasNotFaund ]
     queryParameters: 
       customerId?: integer
       productId?: integer
@@ -75,7 +75,7 @@ types:
 /Products:
   get:
     description: Get product list
-    is: [ hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest]
+    is: [ hasPagination, hasReqCache-control, hasCachebalResponse, hasCommonErrorCodes,hasBadRequest,hasNotFaund]
     responses: 
       200:
         body: 
