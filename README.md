@@ -1,4 +1,4 @@
-Deloitte Customer Service APIs
+Sample - Customer Service APIs
 
 Overview:
 This API specification is designed for customer service support. First version is targeted for initial release with API to access customers object.
